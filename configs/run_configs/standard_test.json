@@ -1,0 +1,12 @@
+{
+  "run_name": "standard_eval",
+  "results_dir": "nolima_ru/results",
+  "context_lengths": {
+    "evilfreelancer/ruGPT3XL": [256, 512, 1024, 1536, 2000],
+    "evilfreelancer/ruGPT3XL-8k": [256, 512, 1024, 2048, 4096, 6144, 8000]
+  },
+  "depth_nodes": 10,
+  "haystack_cache_path": "nolima_ru/data/haystack/haystack_cache.json",
+  "needles_path": "nolima_ru/data/needles_ru.json",
+  "max_new_tokens": 15
+}

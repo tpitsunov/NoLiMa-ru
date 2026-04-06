@@ -1,0 +1,7 @@
+{
+  "model_name": "evilfreelancer/ruGPT3XL",
+  "tokenizer_name": "evilfreelancer/ruGPT3XL",
+  "dtype": "bfloat16",
+  "trust_remote_code": true,
+  "max_context_length": 2048
+}
