@@ -70,10 +70,18 @@ def validate_needles(needles_file):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--tokenizer", type=str, default="evilfreelancer/ruGPT3XL-8k", help="HF Tokenizer name")
+    parser.add_argument("--model_config", type=str, help="Path to model config to extract tokenizer from")
+    parser.add_argument("--tokenizer", type=str, default="evilfreelancer/ruGPT3XL-8k", help="HF Tokenizer name (fallback)")
     parser.add_argument("--haystack_out", type=str, default="data/haystack/haystack_cache.json")
     parser.add_argument("--needles_in", type=str, default="data/needles_ru.json")
     args = parser.parse_args()
     
+    tokenizer_name = args.tokenizer
+    if args.model_config:
+        with open(args.model_config, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+            tokenizer_name = config.get("tokenizer_name", tokenizer_name)
+            print(f"📌 Using tokenizer from config: {tokenizer_name}")
+
     validate_needles(args.needles_in)
-    build_haystack(args.tokenizer, args.haystack_out)
+    build_haystack(tokenizer_name, args.haystack_out)
