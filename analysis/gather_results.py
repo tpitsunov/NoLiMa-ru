@@ -10,7 +10,7 @@ def parse_results(results_dir):
     all_files = glob.glob(os.path.join(results_dir, "raw_*.json"))
     
     if not all_files:
-        print("Нет файлов для анализа в", results_dir)
+        print("No files to analyze in", results_dir)
         return
         
     for file_path in all_files:
@@ -41,13 +41,13 @@ def parse_results(results_dir):
         plot_path = os.path.join(results_dir, f"heatmap_{safe_name}.png")
         plt.savefig(plot_path)
         plt.close()
-        print(f"📊 Heatmap сохранен: {plot_path}")
+        print(f"📊 Heatmap saved: {plot_path}")
         
         # Вычисляем Base Score (условимся, что это минимальный контекст < 1k, обычно 256-500)
         short_ctx_df = agg[agg['context_length'] <= 1000]
         if not short_ctx_df.empty:
             base_score = short_ctx_df['accuracy'].mean()
-            print(f"🧮 Base Score (<1K) для {model_name}: {base_score:.2f}")
+            print(f"🧮 Base Score (<1K) for {model_name}: {base_score:.2f}")
             thresh = base_score * 0.85
             
             # Ищем Effective Length (максимальный контекст, где средняя точность >= 85% от Base Score)

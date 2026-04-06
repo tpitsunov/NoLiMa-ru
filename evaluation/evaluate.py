@@ -37,7 +37,7 @@ def main():
         device = "cuda"
     else:
         device = "cpu"
-    print(f"🖥 Инициализация устройства: {device.upper()}")
+    print(f"🖥 Initializing device: {device.upper()}")
 
     # Загрузка
     model_name = model_config["model_name"]
@@ -47,7 +47,7 @@ def main():
     # MPS не всегда хорошо кушает bfloat16 в HF, поэтому под MPS часто используется float16
     dtype = torch.float16 if device == "mps" and dtype_str == "bfloat16" else (torch.bfloat16 if dtype_str == "bfloat16" else torch.float32)
 
-    print(f"🤖 Загрузка модели {model_name}...")
+    print(f"🤖 Loading model {model_name}...")
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, trust_remote_code=model_config.get("trust_remote_code", True))
     
     model = AutoModelForCausalLM.from_pretrained(
@@ -79,9 +79,9 @@ def main():
     
     results_list = []
     
-    print("\n🚀 Запуск бенчмарка NoLiMa...")
+    print("\n🚀 Starting NoLiMa benchmark...")
     for total_ctx in contexts:
-        print(f"\n📏 Контекст: {total_ctx} токенов")
+        print(f"\n📏 Context: {total_ctx} tokens")
         total_tests = len(depth_percentages) * len(needles)
         pbar = tqdm(total=total_tests, desc=f"Ctx {total_ctx}")
 
@@ -144,7 +144,7 @@ def main():
     with open(details_file, "w", encoding="utf-8") as f:
         json.dump(results_list, f, indent=2, ensure_ascii=False)
 
-    print(f"\n✅ Сырые логи сохранены в {details_file}")
+    print(f"\n✅ Raw logs saved to {details_file}")
 
 if __name__ == "__main__":
     main()
