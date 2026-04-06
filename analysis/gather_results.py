@@ -64,7 +64,7 @@ def parse_results(results_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--results_dir", type=str, default="nolima_ru/results")
+    parser.add_argument("--results_dir", type=str, default="results")
     args = parser.parse_args()
     
     parse_results(args.results_dir)

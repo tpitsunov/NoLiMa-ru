@@ -71,8 +71,8 @@ def validate_needles(needles_file):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--tokenizer", type=str, default="evilfreelancer/ruGPT3XL-8k", help="HF Tokenizer name")
-    parser.add_argument("--haystack_out", type=str, default="nolima_ru/data/haystack/haystack_cache.json")
-    parser.add_argument("--needles_in", type=str, default="nolima_ru/data/needles_ru.json")
+    parser.add_argument("--haystack_out", type=str, default="data/haystack/haystack_cache.json")
+    parser.add_argument("--needles_in", type=str, default="data/needles_ru.json")
     args = parser.parse_args()
     
     validate_needles(args.needles_in)
